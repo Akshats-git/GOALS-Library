@@ -5,7 +5,7 @@ import MainLayout from 'layout/MainLayout'
 
 // dashboard routing
 const Dashboard = lazyLoad(
-  () => import('views/Dashboard'),
+  () => import('views/dashboard'),
 )
 const StudentsList = lazyLoad(() => import('views/pages/librarian/StudentsList'))
 const RequestsList = lazyLoad(() => import('views/pages/librarian/RequestsList'))

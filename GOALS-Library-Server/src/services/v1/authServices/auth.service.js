@@ -80,15 +80,36 @@ const resetPassword = async (resetPasswordToken, newPassword) => {
  */
 const verifyEmail = async (email) => {
   try {
-    // Verify email using an external service (e.g., MailboxLayer)
-    const emailRes = await axios.get(`http://apilayer.net/api/check?access_key=${process.env.MAILBOXLAYER_API_KEY}&email=${email}`);
+    const mailboxKey = process.env.MAILBOXLAYER_API_KEY;
+    const isProduction = process.env.NODE_ENV === 'production';
+
+    // Allow local development without an external email verification key.
+    if (!mailboxKey) {
+      if (!isProduction) {
+        return true;
+      }
+      throw new Error('Email verification service is not configured');
+    }
+
+    // Verify email using MailboxLayer.
+    const emailRes = await axios.get('https://apilayer.net/api/check', {
+      params: {
+        access_key: mailboxKey,
+        email,
+      },
+    });
     
     // Check if the email is valid from the external service response
-    if (!emailRes.data || !emailRes.data.format_valid || !emailRes.data.smtp_check) {
+    if (!emailRes.data || !emailRes.data.format_valid) {
       throw new Error('Invalid or unverified email address');
     }
-    console.log(emailRes);
-    return emailRes.data.format_valid && emailRes.data.smtp_check;
+
+    // SMTP checks are often disabled/unreliable on free tiers. Keep strict behavior in production.
+    if (isProduction && !emailRes.data.smtp_check) {
+      throw new Error('Invalid or unverified email address');
+    }
+
+    return true;
     
   } catch (error) {
     throw new ApiError(httpStatus.UNAUTHORIZED, `Email verification failed: ${error.message}`);

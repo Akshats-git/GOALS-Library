@@ -40,7 +40,14 @@ app.use(compression());
 // enable cors
 app.use(
     cors({
-      origin: ['http://localhost:3000', 'http://10.50.49.216:3000'],
+      origin: [
+        'http://localhost:3000',
+        'http://localhost:3001',
+        'http://localhost:5173',
+        'http://10.50.49.216:3000',
+        'http://10.50.49.216:3001',
+        'http://10.50.49.216:5173',
+      ],
       credentials: true,
       exposedHeaders: ['Set-Cookie'],
     }),

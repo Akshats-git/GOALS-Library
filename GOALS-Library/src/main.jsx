@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { Theme } from '@radix-ui/themes'
-import '@radix-ui/themes/styles.css'
+import radixThemeStyles from '@radix-ui/themes/styles.css?raw'
 // project imports
 import App from './App'
 import store from 'store/store'
@@ -25,6 +25,10 @@ import '@fontsource/poppins/700.css'
 // style + assets
 import 'assets/scss/style.scss'
 // import reportWebVitals from 'reportWebVitals';
+
+const radixThemeStyleElement = document.createElement('style')
+radixThemeStyleElement.textContent = radixThemeStyles
+document.head.append(radixThemeStyleElement)
 
 const container = document.getElementById('root')
 const root = createRoot(container) // createRoot(container!) if you use TypeScript

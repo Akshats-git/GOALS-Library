@@ -202,15 +202,21 @@ const Dashboard = () => {
               right: 0,
               gap: 1,
             }}>
-            {userRole === 'Student' && <Tooltip title="Know Your Librarian">
-              <Fab color="secondary" onClick={handleOpenLibrarianModal}>
-                {librarian.length > 0 ? <img
-                  src={librarian[0].profile}
-                  alt="Profile"
-                  className="rounded-full"
-                /> : <IconUserEdit />}
-              </Fab>
-            </Tooltip>}
+            {userRole === 'Student' && (
+              <Tooltip title="Know Your Librarian">
+                <Fab color="secondary" onClick={handleOpenLibrarianModal}>
+                  {librarian?.[0]?.profile ? (
+                    <img
+                      src={librarian[0].profile}
+                      alt="Profile"
+                      className="rounded-full"
+                    />
+                  ) : (
+                    <IconUserEdit />
+                  )}
+                </Fab>
+              </Tooltip>
+            )}
 
             <Tooltip title="Leaderboard">
               <Fab color="secondary" onClick={handleOpenLeaderboardModal}>
@@ -233,25 +239,34 @@ const Dashboard = () => {
           Know Your Librarian
         </DialogTitle>
         <DialogContent>
-          {librarian.length > 0 ? (
-            <>
-              <div className='flex items-center space-x-2'>
-              <img src={librarian[0].profile} alt="Profile" className='rounded-full' height={50} width={50} />
-              <p className='text-xl font-bold'>{librarian[0].name}</p>
-              </div>
-              <span className='flex items-center space-x-2 mt-3'>
-              <IconMail />
-              <p className='text-lg'>{librarian[0].email}</p>
-              </span>
-              <span className='flex items-center space-x-2 mt-1'>
-              <IconPhone />
-              <p className='text-lg'>{librarian[0].phone}</p>
-              </span>
-              <span className='flex items-center space-x-2 mt-1'>
-              <IconId />
-              <p className='text-lg'>{librarian[0].Id}</p>
-              </span>
-            </>
+          {librarian && librarian.length > 0 ? (
+            (() => {
+              const lib = librarian[0] || {};
+              return (
+                <>
+                  <div className='flex items-center space-x-2'>
+                    {lib.profile ? (
+                      <img src={lib.profile} alt="Profile" className='rounded-full' height={50} width={50} />
+                    ) : (
+                      <IconUserEdit />
+                    )}
+                    <p className='text-xl font-bold'>{lib.name || 'Unknown'}</p>
+                  </div>
+                  <span className='flex items-center space-x-2 mt-3'>
+                    <IconMail />
+                    <p className='text-lg'>{lib.email || 'N/A'}</p>
+                  </span>
+                  <span className='flex items-center space-x-2 mt-1'>
+                    <IconPhone />
+                    <p className='text-lg'>{lib.phone || 'N/A'}</p>
+                  </span>
+                  <span className='flex items-center space-x-2 mt-1'>
+                    <IconId />
+                    <p className='text-lg'>{lib.Id || 'N/A'}</p>
+                  </span>
+                </>
+              );
+            })()
           ) : (
             <p>No librarian data available</p>
           )}

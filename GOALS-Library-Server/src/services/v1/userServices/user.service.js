@@ -11,6 +11,12 @@ const createUser = async (userBody) => {
   if (await User.isEmailTaken(userBody.email)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
   }
+  if (await User.isPhoneTaken(userBody.phone)) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Phone number already taken');
+  }
+  if (await User.isInstituteIdTaken(userBody.Id)) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Id already taken');
+  }
   return User.create(userBody);
 };
 
@@ -63,6 +69,12 @@ const updateUserById = async (userId, updateBody) => {
   }
   if (updateBody.email && (await User.isEmailTaken(updateBody.email, userId))) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+  }
+  if (updateBody.phone && (await User.isPhoneTaken(updateBody.phone, userId))) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Phone number already taken');
+  }
+  if (updateBody.Id && (await User.isInstituteIdTaken(updateBody.Id, userId))) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Id already taken');
   }
   
   return user;
