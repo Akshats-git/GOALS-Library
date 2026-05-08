@@ -18,19 +18,21 @@ import DirectionsCarIcon from '@mui/icons-material/DirectionsCar'
 // ==============================|| PROGRESS BAR WITH LABEL ||============================== //
 
 function LinearProgressWithLabel({ value, ...others }) {
+  const theme = useTheme()
+
   return (
     <Grid container direction="column" spacing={1} sx={{ mt: 1.5 }}>
       <Grid item>
         <Grid container justifyContent="space-between">
           <Grid item>
-            <Typography variant="h6" sx={{ color: 'primary.800' }}>
+            <Typography variant="h6" sx={{ color: theme.palette.text.primary }}>
               Akshat Gupta
             </Typography>
           </Grid>
         </Grid>
       </Grid>
       <Grid item>
-        <Typography variant="h6" sx={{ color: 'grey' }}>
+        <Typography variant="h6" sx={{ color: theme.palette.text.secondary }}>
           Email - akshatgupta099@gmail.com
         </Typography>
       </Grid>
@@ -46,11 +48,12 @@ LinearProgressWithLabel.propTypes = {
 
 const MenuCard = () => {
   const theme = useTheme()
+  const isDark = theme.palette.mode === 'dark'
 
   return (
     <Card
       sx={{
-        bgcolor: 'primary.light',
+        bgcolor: isDark ? theme.palette.dark.main : theme.palette.primary.light,
         mb: 2.75,
         overflow: 'hidden',
         position: 'relative',
@@ -59,7 +62,7 @@ const MenuCard = () => {
           position: 'absolute',
           width: 157,
           height: 157,
-          bgcolor: 'primary.200',
+          bgcolor: isDark ? theme.palette.dark.dark : theme.palette.primary[200],
           borderRadius: '50%',
           top: -105,
           right: -96,
@@ -74,12 +77,14 @@ const MenuCard = () => {
             <ListItemText
               sx={{ mt: 0 }}
               primary={
-                <Typography variant="subtitle1" sx={{ color: 'primary.800' }}>
+                <Typography variant="subtitle1" sx={{ color: theme.palette.text.primary }}>
                   <strong>ज्ञान वाटिका</strong> <br /> GOALS Library
                 </Typography>
               }
               secondary={
-                <Typography variant="caption" sx={{ fontSize: 8 }}>
+                <Typography
+                  variant="caption"
+                  sx={{ fontSize: 8, color: theme.palette.text.secondary }}>
                   {' '}
                   For IIT Bhilai
                 </Typography>

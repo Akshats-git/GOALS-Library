@@ -1,5 +1,7 @@
 export default function componentStyleOverrides(theme) {
-  const bgColor = theme.colors?.grey50
+  const isDark = theme?.customization?.navType === 'dark'
+  const bgColor = isDark ? theme.colors?.darkLevel2 : theme.colors?.grey50
+  const surfaceColor = isDark ? theme.colors?.darkPaper : theme.paper
   return {
     MuiButton: {
       styleOverrides: {
@@ -16,16 +18,25 @@ export default function componentStyleOverrides(theme) {
       styleOverrides: {
         root: {
           backgroundImage: 'none',
+          backgroundColor: surfaceColor,
         },
         rounded: {
           borderRadius: `${theme?.customization?.borderRadius}px`,
         },
       },
     },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          backgroundColor: surfaceColor,
+          border: `1px solid ${theme.divider}`,
+        },
+      },
+    },
     MuiCardHeader: {
       styleOverrides: {
         root: {
-          color: theme.colors?.textDark,
+          color: theme.textDark,
           padding: '24px',
         },
         title: {
@@ -105,10 +116,14 @@ export default function componentStyleOverrides(theme) {
           background: bgColor,
           borderRadius: `${theme?.customization?.borderRadius}px`,
           '& .MuiOutlinedInput-notchedOutline': {
-            borderColor: theme.colors?.grey400,
+            borderColor: theme.divider,
           },
           '&:hover $notchedOutline': {
-            borderColor: theme.colors?.primaryLight,
+            borderColor: theme.colors?.primaryMain,
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: theme.colors?.primaryMain,
+            borderWidth: '1px',
           },
           '&.MuiInputBase-multiline': {
             padding: 1,
