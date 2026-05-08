@@ -24,17 +24,14 @@ function LinearProgressWithLabel({ value, ...others }) {
         <Grid container justifyContent="space-between">
           <Grid item>
             <Typography variant="h6" sx={{ color: 'primary.800' }}>
-              SLOK TULSYAN
+              Akshat Gupta
             </Typography>
           </Grid>
         </Grid>
       </Grid>
       <Grid item>
         <Typography variant="h6" sx={{ color: 'grey' }}>
-          Phone Number - +91 9931085103
-        </Typography>
-        <Typography variant="h6" sx={{ color: 'grey' }}>
-          Email - sloktulsyan@gmail.com
+          Email - akshatgupta099@gmail.com
         </Typography>
       </Grid>
     </Grid>

@@ -49,7 +49,6 @@ const AuthSignup = () => {
   const handleSubmit = async (values, { setErrors, setSubmitting }) => {
     try {
       await SignupApi(values.name, values.email, values.phone, values.Id, values.password)
-      localStorage.setItem(userRole, 'student')
       navigate('/student')
     } catch (error) {
       console.error('Form submission failed:', error)

@@ -8,7 +8,7 @@ import {
     Typography,
   } from '@mui/material'
   import { useEffect, useState } from 'react'
-  import createLibrarian from 'api/admin/createLibrarian'
+  import createLibrarian from 'api/createLibrarian'
   
   const CreateLibrarian = () => {
     const [formData, setFormData] = useState({
