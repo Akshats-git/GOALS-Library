@@ -1,7 +1,6 @@
 export default function componentStyleOverrides(theme) {
-  const isDark = theme?.customization?.navType === 'dark'
-  const bgColor = isDark ? theme.colors?.darkLevel2 : theme.colors?.grey50
-  const surfaceColor = isDark ? theme.colors?.darkPaper : theme.paper
+  const bgColor = theme.colors?.grey50
+  const surfaceColor = theme.paper
   return {
     MuiButton: {
       styleOverrides: {

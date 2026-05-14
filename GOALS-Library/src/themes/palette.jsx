@@ -5,9 +5,9 @@
 
 export default function themePalette(theme) {
   return {
-    mode: theme?.customization?.navType,
+    mode: 'light',
     common: {
-      black: theme.colors?.darkPaper,
+      black: theme.colors?.grey900,
     },
     primary: {
       light: theme.colors?.primaryLight,
@@ -53,11 +53,11 @@ export default function themePalette(theme) {
       900: theme.textDark,
     },
     dark: {
-      light: theme.colors?.darkTextPrimary,
-      main: theme.colors?.darkLevel1,
-      dark: theme.colors?.darkLevel2,
-      800: theme.colors?.darkBackground,
-      900: theme.colors?.darkPaper,
+      light: theme.colors?.grey700,
+      main: theme.colors?.grey900,
+      dark: theme.colors?.grey900,
+      800: theme.colors?.grey900,
+      900: theme.colors?.grey900,
     },
     text: {
       primary: theme.darkTextPrimary,

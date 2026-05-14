@@ -48,12 +48,11 @@ LinearProgressWithLabel.propTypes = {
 
 const MenuCard = () => {
   const theme = useTheme()
-  const isDark = theme.palette.mode === 'dark'
 
   return (
     <Card
       sx={{
-        bgcolor: isDark ? theme.palette.dark.main : theme.palette.primary.light,
+        bgcolor: theme.palette.primary.light,
         mb: 2.75,
         overflow: 'hidden',
         position: 'relative',
@@ -62,7 +61,7 @@ const MenuCard = () => {
           position: 'absolute',
           width: 157,
           height: 157,
-          bgcolor: isDark ? theme.palette.dark.dark : theme.palette.primary[200],
+          bgcolor: theme.palette.primary[200],
           borderRadius: '50%',
           top: -105,
           right: -96,

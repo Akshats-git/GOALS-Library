@@ -9,7 +9,6 @@ export const initialState = {
   defaultId: 'default',
   fontFamily: config.fontFamily,
   borderRadius: config.borderRadius,
-  navType: config.navType,
   opened: true,
 }
 
@@ -38,14 +37,6 @@ const customizationReducer = (state = initialState, action) => {
       return {
         ...state,
         borderRadius: action.borderRadius,
-      }
-    case actionTypes.SET_NAV_TYPE:
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('themeMode', action.navType)
-      }
-      return {
-        ...state,
-        navType: action.navType,
       }
     default:
       return state
